@@ -1,8 +1,8 @@
 CELL_SIZE = 10
 CELL_MARGIN = 2
-GRID_COLOR = "black"
 CELL_COLOR = "black"
 BG_COLOR = "light gray"
+GRID_COLOR = "black"
 
 RES = WIDTH, HEIGHT = 800, 600
 W, H = WIDTH // CELL_SIZE, HEIGHT // CELL_SIZE
