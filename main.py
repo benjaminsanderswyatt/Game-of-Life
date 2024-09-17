@@ -19,7 +19,7 @@ class State(Enum):
     Quit = 3
 
 
-gameState = State.Running
+gameState = State.Start
 
 current_map = np.random.randint(2, size=(settings.H, settings.W))
 
@@ -27,9 +27,21 @@ current_map = np.random.randint(2, size=(settings.H, settings.W))
 while gameState != State.Quit:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
+    #for event in pygame.event.get():
+    #    if event.type == pygame.QUIT:
+    #        gameState = State.Quit
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameState = State.Quit
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                if gameState == State.Running:
+                    gameState = State.Paused
+                elif gameState == State.Paused:
+                    gameState = State.Running
+            elif event.key == pygame.K_RETURN and gameState == State.Start:
+                gameState = State.Running
 
     match gameState:
         case State.Start:
