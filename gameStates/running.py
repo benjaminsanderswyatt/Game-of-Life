@@ -15,6 +15,17 @@ W, H = settings.W, settings.H
 FPS = settings.FPS
 
 
+# Create a separate surface for the grid
+grid_surface = pygame.Surface((WIDTH, HEIGHT))
+grid_surface.fill("light gray")  # Fill the background
+
+# Draw the grid lines on the surface
+for x in range(0, WIDTH, CELL_SIZE):
+    pygame.draw.line(grid_surface, "black", (x, 0), (x, HEIGHT))
+for y in range(0, HEIGHT, CELL_SIZE):
+    pygame.draw.line(grid_surface, "black", (0, y), (WIDTH, y))
+
+
 def check_cell_surroundings(current_map, x, y):
     count = 0
 
@@ -39,20 +50,9 @@ def check_cell_surroundings(current_map, x, y):
         return 0  # Cell stays dead
 
 
-def draw_grid(screen):
-    # Draw grid
-    for x in range(0, WIDTH, CELL_SIZE):
-        pygame.draw.line(screen, GRID_COLOR, (x, 0), (x, HEIGHT))
-    for y in range(0, HEIGHT, CELL_SIZE):
-        pygame.draw.line(screen, GRID_COLOR, (0, y), (WIDTH, y))
-
-
-
 def main_running(screen, current_map):
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill(BG_COLOR)
-
-    draw_grid(screen)
+    screen.blit(grid_surface, (0, 0))
 
     next_map = np.copy(current_map)
 
