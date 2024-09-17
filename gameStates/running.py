@@ -39,16 +39,20 @@ def check_cell_surroundings(current_map, x, y):
         return 0  # Cell stays dead
 
 
-def main_running(screen, current_map):
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill(BG_COLOR)
-
-    # RENDER GAME HERE
+def draw_grid(screen):
     # Draw grid
     for x in range(0, WIDTH, CELL_SIZE):
         pygame.draw.line(screen, GRID_COLOR, (x, 0), (x, HEIGHT))
     for y in range(0, HEIGHT, CELL_SIZE):
         pygame.draw.line(screen, GRID_COLOR, (0, y), (WIDTH, y))
+
+
+
+def main_running(screen, current_map):
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill(BG_COLOR)
+
+    draw_grid(screen)
 
     next_map = np.copy(current_map)
 
