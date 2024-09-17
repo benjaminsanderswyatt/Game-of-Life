@@ -4,8 +4,13 @@ import pygame
 import settings
 
 # Calibrate settings
-RES = WIDTH, HEIGHT = settings.WIDTH, settings.HEIGHT
 CELL_SIZE = settings.CELL_SIZE
+CELL_MARGIN = settings.CELL_MARGIN
+GRID_COLOR = settings.GRID_COLOR
+CELL_COLOR = settings.CELL_COLOR
+BG_COLOR = settings.BG_COLOR
+
+RES = WIDTH, HEIGHT = settings.WIDTH, settings.HEIGHT
 W, H = settings.W, settings.H
 FPS = settings.FPS
 
@@ -36,14 +41,14 @@ def check_cell_surroundings(current_map, x, y):
 
 def main_running(screen, current_map):
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("light gray")
+    screen.fill(BG_COLOR)
 
     # RENDER GAME HERE
     # Draw grid
     for x in range(0, WIDTH, CELL_SIZE):
-        pygame.draw.line(screen, "black", (x, 0), (x, HEIGHT))
+        pygame.draw.line(screen, GRID_COLOR, (x, 0), (x, HEIGHT))
     for y in range(0, HEIGHT, CELL_SIZE):
-        pygame.draw.line(screen, "black", (0, y), (WIDTH, y))
+        pygame.draw.line(screen, GRID_COLOR, (0, y), (WIDTH, y))
 
     next_map = np.copy(current_map)
 
@@ -52,7 +57,7 @@ def main_running(screen, current_map):
         for y in range(0, H):
             if current_map[y][x]:
                 # Draw the rectangle for a live cell
-                pygame.draw.rect(screen, "black", (x * CELL_SIZE + 2, y * CELL_SIZE + 2, CELL_SIZE - 2, CELL_SIZE - 2))
+                pygame.draw.rect(screen, CELL_COLOR, (x * CELL_SIZE + CELL_MARGIN, y * CELL_SIZE + CELL_MARGIN, CELL_SIZE - CELL_MARGIN, CELL_SIZE - CELL_MARGIN))
 
             # Update the next state based on the surroundings
             next_map[y][x] = check_cell_surroundings(current_map, x, y)
