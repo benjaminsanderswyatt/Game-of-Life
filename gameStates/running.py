@@ -29,11 +29,15 @@ for y in range(0, HEIGHT, CELL_SIZE):
 
 def check_cell_surroundings(current_map, x, y):
     count = 0
+    rows, cols = current_map.shape
 
     # Check the surrounding cells
     for i in range(max(0, y - 1), min(settings.H, y + 2)):
         for j in range(max(0, x - 1), min(settings.W, x + 2)):
-            if current_map[i][j]:
+            # Wrap around using modulo
+            ni = i % rows
+            nj = j % cols
+            if current_map[ni][nj]:
                 count += 1
 
     # If the cell was originally alive subtract itself from the count
