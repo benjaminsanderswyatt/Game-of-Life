@@ -1,14 +1,14 @@
 import pygame
 import numpy as np
+from enum import Enum
 
 RES = WIDTH, HEIGHT = 800, 600
 CELL_SIZE = 10
 W, H = WIDTH // CELL_SIZE, HEIGHT // CELL_SIZE
 FPS = 10
 
-current_state = np.random.randint(2, size=(H, W))
-next_state = np.zeros_like(current_state)
-
+current_map = np.random.randint(2, size=(H, W))
+next_map = np.zeros_like(current_map)
 
 
 def check_cell_surroundings(current_state, x, y):
@@ -35,19 +35,25 @@ def check_cell_surroundings(current_state, x, y):
         return 0  # Cell stays dead
 
 
+class State(Enum):
+    Start = 0
+    Running = 1
+    Paused = 1
+    Quit = 2
 
 
 pygame.init()
 screen = pygame.display.set_mode(RES)
 clock = pygame.time.Clock()
-running = True
+gameState = State.Running
 
-while running:
+
+while gameState == State.Running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            gameState = State.Quit
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("light gray")
@@ -60,19 +66,17 @@ while running:
         pygame.draw.line(screen, "black", (0, y), (WIDTH, y))
 
     # Draw cells
-
     for x in range(0, W):
         for y in range(0, H):
-            if current_state[y][x]:
+            if current_map[y][x]:
                 # Draw the rectangle for a live cell
                 pygame.draw.rect(screen, "black", (x * CELL_SIZE + 2, y * CELL_SIZE + 2, CELL_SIZE - 2, CELL_SIZE - 2))
 
             # Update the next state based on the surroundings
-            next_state[y][x] = check_cell_surroundings(current_state, x, y)
+            next_map[y][x] = check_cell_surroundings(current_map, x, y)
 
     # Copy the next state to the current state for the next iteration
-    current_state = np.copy(next_state)
-
+    current_map = np.copy(next_map)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
