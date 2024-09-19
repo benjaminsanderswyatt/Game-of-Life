@@ -4,6 +4,8 @@ from enum import Enum
 
 from gameStates import start, menu, running, paused
 import settings
+import ui.buttons
+
 
 pygame.init()
 screen = pygame.display.set_mode(settings.RES, pygame.RESIZABLE)
@@ -56,6 +58,10 @@ pygame.display.flip()
 
 current_map = np.random.randint(2, size=(settings.H, settings.W))
 
+
+my_button = ui.buttons.Button('Click Me!', "red", "yellow", "blue", "Orange", 10, 10, 200, 100, True)
+
+
 # GAME LOOP
 while gameState != State.Quit:
 
@@ -66,7 +72,7 @@ while gameState != State.Quit:
 
         match gameState:
             case State.Start:
-                start.event(event)
+                start.event(event, screen)
 
             case State.Menu:
                 menu.event(event)
@@ -81,6 +87,7 @@ while gameState != State.Quit:
     match gameState:
         case State.Start:
             start.main_start(screen)
+            start.render(screen)
 
         case State.Menu:
             menu.main_menu(screen)
@@ -96,6 +103,7 @@ while gameState != State.Quit:
 
     # flip() the display to put your work on screen
     pygame.display.flip()
+    #pygame.display.update()
 
     clock.tick(settings.FPS)
 
