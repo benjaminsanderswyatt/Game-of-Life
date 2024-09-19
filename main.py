@@ -56,22 +56,31 @@ pygame.display.flip()
 
 current_map = np.random.randint(2, size=(settings.H, settings.W))
 
-while gameState != State.Quit:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
+
+# EVENT HANDLER
+def event_handler(gameState):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameState = State.Quit
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if gameState == State.Running:
-                    gameState = State.Paused
-                elif gameState == State.Paused:
-                    gameState = State.Running
-            elif event.key == pygame.K_RETURN and gameState == State.Start:
-                gameState = State.Running
+
+        match gameState:
+            case State.Start:
+                start.event(event)
+
+            case State.Menu:
+                menu.event(event)
+
+            case State.Running:
+                running.event(event)
+
+            case State.Paused:
+                paused.event(event)
 
 
+# GAME LOOP
+while gameState != State.Quit:
+
+    event_handler(gameState)
 
     match gameState:
         case State.Start:

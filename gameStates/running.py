@@ -72,3 +72,6 @@ def main_running(screen, current_map):
             next_map[y][x] = check_cell_surroundings(current_map, x, y)
 
     return next_map
+
+def event(event):
+    return 0
