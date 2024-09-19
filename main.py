@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 from enum import Enum
 
-from gameStates import start, running, paused
+from gameStates import start, menu, running, paused
 import settings
 
 pygame.init()
@@ -13,9 +13,10 @@ clock = pygame.time.Clock()
 
 class State(Enum):
     Start = 0
-    Running = 1
-    Paused = 2
-    Quit = 3
+    Menu = 1
+    Running = 2
+    Paused = 3
+    Quit = 4
 
 
 gameState = State.Start
@@ -70,9 +71,14 @@ while gameState != State.Quit:
             elif event.key == pygame.K_RETURN and gameState == State.Start:
                 gameState = State.Running
 
+
+
     match gameState:
         case State.Start:
             start.main_start(screen)
+
+        case State.Menu:
+            menu.main_menu(screen)
 
         case State.Running:
 
