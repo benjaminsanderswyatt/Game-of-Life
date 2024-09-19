@@ -56,9 +56,10 @@ pygame.display.flip()
 
 current_map = np.random.randint(2, size=(settings.H, settings.W))
 
+# GAME LOOP
+while gameState != State.Quit:
 
-# EVENT HANDLER
-def event_handler(gameState):
+    # EVENT HANDLER
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameState = State.Quit
@@ -76,12 +77,7 @@ def event_handler(gameState):
             case State.Paused:
                 paused.event(event)
 
-
-# GAME LOOP
-while gameState != State.Quit:
-
-    event_handler(gameState)
-
+    # UPDATE HANDLER
     match gameState:
         case State.Start:
             start.main_start(screen)
