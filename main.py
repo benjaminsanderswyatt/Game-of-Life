@@ -67,6 +67,11 @@ while gameState != State.Quit:
         case State.Paused:
             paused.main_paused()
 
+    # Print current width and height
+    print("Width:", settings.WIDTH)
+    print("Height:", settings.HEIGHT)
+
+
     # flip() the display to put your work on screen
     pygame.display.flip()
     # pygame.display.update()
