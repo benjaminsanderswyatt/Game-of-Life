@@ -11,20 +11,19 @@ BG_COLOR = settings.BG_COLOR
 
 GRID_COLOR = settings.GRID_COLOR
 
-RES = WIDTH, HEIGHT = settings.WIDTH, settings.HEIGHT
 W, H = settings.W, settings.H
 FPS = settings.FPS
 
 
 # Create a separate surface for the grid
-grid_surface = pygame.Surface((WIDTH, HEIGHT))
+grid_surface = pygame.Surface((settings.WIDTH, settings.HEIGHT))
 grid_surface.fill(BG_COLOR)  # Fill the background
 
 # Draw the grid lines on the surface
-for x in range(0, WIDTH, CELL_SIZE):
-    pygame.draw.line(grid_surface, GRID_COLOR, (x, 0), (x, HEIGHT))
-for y in range(0, HEIGHT, CELL_SIZE):
-    pygame.draw.line(grid_surface, GRID_COLOR, (0, y), (WIDTH, y))
+for x in range(0, settings.WIDTH, CELL_SIZE):
+    pygame.draw.line(grid_surface, GRID_COLOR, (x, 0), (x, settings.HEIGHT))
+for y in range(0, settings.HEIGHT, CELL_SIZE):
+    pygame.draw.line(grid_surface, GRID_COLOR, (0, y), (settings.WIDTH, y))
 
 
 def check_cell_surroundings(current_map, x, y):
