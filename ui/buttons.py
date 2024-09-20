@@ -41,8 +41,10 @@ class Button:
         screen.blit(button_text, (text_x, text_y))
 
     def check_clicked(self):
+        mouse_pos = pygame.mouse.get_pos()
         left_click = pygame.mouse.get_pressed()[0]
-        if self.check_hover() and left_click and self.enabled:
+        button_rect = self.rect
+        if left_click and button_rect.collidepoint(mouse_pos) and self.enabled:
             return True
         else:
             return False
