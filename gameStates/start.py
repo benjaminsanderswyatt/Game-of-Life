@@ -3,7 +3,7 @@ import pygame
 import ui.buttons
 import settings
 
-my_button = ui.buttons.Button('Click Me!', "red", "yellow", "blue", "Orange", 10, 10, 200, 100, True)
+my_button = ui.buttons.Button('Click Me!', "red", "yellow","Green", "blue", "Orange", 10, 10, 200, 100, True)
 
 
 def render(screen):
