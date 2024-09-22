@@ -3,8 +3,9 @@ import pygame
 from enum import Enum
 
 from gameStates import start, menu, running, paused
+from gameStates import game_state_manager as gsm
+from gameStates.game_state_manager import State
 import settings
-import ui.buttons
 
 
 pygame.init()
@@ -12,16 +13,6 @@ screen = pygame.display.set_mode(settings.RES, pygame.RESIZABLE)
 pygame.display.set_caption("Game of Life")
 clock = pygame.time.Clock()
 
-
-class State(Enum):
-    Start = 0
-    Menu = 1
-    Running = 2
-    Paused = 3
-    Quit = 4
-
-
-gameState = State.Start
 
 # Set start background
 # Set up fonts
@@ -56,14 +47,14 @@ current_map = np.random.randint(2, size=(settings.H, settings.W))
 
 
 # GAME LOOP
-while gameState != State.Quit:
+while gsm.get_game_state() != State.Quit:
 
     # EVENT HANDLER
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            gameState = State.Quit
+            gsm.set_game_state(State.Quit)
 
-        match gameState:
+        match gsm.get_game_state():
             case State.Start:
                 start.event(event)
 
@@ -77,7 +68,7 @@ while gameState != State.Quit:
                 paused.event(event)
 
     # UPDATE HANDLER
-    match gameState:
+    match gsm.get_game_state():
         case State.Start:
             start.main_start(screen)
             start.render(screen)
