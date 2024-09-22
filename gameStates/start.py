@@ -3,18 +3,21 @@ import pygame
 import ui.buttons
 import settings
 
-my_button = ui.buttons.Button('Click Me!', "red", "yellow","Green", "blue", "Orange", 10, 10, 200, 100, True)
 
+btn_start = ui.buttons.Button('Start', 32, "white", "slate gray", (76, 78, 116), (76, 78, 116), (27, 22, 63),
+                              settings.WIDTH // 2 - 200, settings.HEIGHT // 2, 400, 50, True)
+
+btn_quit = ui.buttons.Button('Quit', 28, "white", "slate gray", (76, 78, 116), (76, 78, 116), (27, 22, 63),
+                              settings.WIDTH // 2 - 150, settings.HEIGHT // 2 + 75, 300, 50, True)
 
 def render(screen):
-    my_button.draw(screen)
-
+    btn_start.draw(screen)
+    btn_quit.draw(screen)
 
 
 def event(event):
-    if my_button.check_clicked():
+    if btn_start.check_clicked():
         print("do something")
-
 
 
 def main_start(screen):

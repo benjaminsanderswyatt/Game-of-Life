@@ -40,18 +40,14 @@ def display_text(screen, text, font, color, position):
 
 
 # Background fill
-screen.fill("dim gray")
+screen.fill((34, 52, 90))
 
 # Display title
 display_text(screen, "GAME OF LIFE", title_font, "white", (settings.WIDTH // 2, settings.HEIGHT // 4))
 
-# Display instructions
-display_text(screen, "Press Enter to Start", text_font, "light gray", (settings.WIDTH // 2, settings.HEIGHT // 2))
-display_text(screen, "Press Space to Pause", text_font, "light gray", (settings.WIDTH // 2, settings.HEIGHT // 2 + 50))
-
 # Display credits
-display_text(screen, "Created by", text_font, "gray", (settings.WIDTH // 2, settings.HEIGHT - 60))
-display_text(screen, "Ben Sanders-Wyatt", credit_font, "gray", (settings.WIDTH // 2, settings.HEIGHT - 30))
+display_text(screen, "Created by", text_font, (83, 107, 148), (settings.WIDTH // 2, settings.HEIGHT - 60))
+display_text(screen, "Ben Sanders-Wyatt", credit_font, (83, 107, 148), (settings.WIDTH // 2, settings.HEIGHT - 30))
 
 # Update the screen
 pygame.display.flip()

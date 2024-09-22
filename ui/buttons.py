@@ -1,12 +1,13 @@
 import pygame
 
 pygame.font.init()
-button_font = pygame.font.Font(None, 18)
+
 
 class Button:
-    def __init__(self, text, text_colour, bg_colour, hover_colour, clicked_colour, boarder_colour, x_pos, y_pos, width,
+    def __init__(self, text, text_size, text_colour, bg_colour, hover_colour, clicked_colour, boarder_colour, x_pos, y_pos, width,
                  height, enabled):
         self.text = text
+        self.text_size = text_size
         self.text_colour = text_colour
         self.bg_colour = bg_colour
         self.hover_colour = hover_colour
@@ -18,6 +19,8 @@ class Button:
         self.enabled = enabled
 
     def draw(self, screen):
+        button_font = pygame.font.Font(None, self.text_size)
+
         button_text = button_font.render(self.text, True, self.text_colour)
         button_rect = self.rect
 
