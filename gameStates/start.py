@@ -2,6 +2,8 @@ import numpy as np
 import pygame
 import ui.buttons
 import settings
+from gameStates import game_state_manager as gsm
+from gameStates.game_state_manager import State
 
 
 btn_start = ui.buttons.Button('Start', 32, "white", "slate gray", (76, 78, 116), (76, 78, 116), (27, 22, 63),
@@ -17,7 +19,10 @@ def render(screen):
 
 def event(event):
     if btn_start.check_clicked():
-        print("do something")
+        gsm.set_game_state(State.Running)
+    elif btn_quit.check_clicked():
+        gsm.set_game_state(State.Quit)
+
 
 
 def main_start(screen):
